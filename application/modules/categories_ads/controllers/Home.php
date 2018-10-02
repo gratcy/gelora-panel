@@ -27,8 +27,13 @@ class Home extends MX_Controller {
 				redirect(site_url('categories_ads/add'));
 			}
 			else {
+				$slug = __slugify($title);
+				
 				$arr = array('ctype' => 2, 'cname' => $title, 'cdesc' => $desc, 'cstatus' => $status, 'cparent' => $cparent, 'ccreatedby' => __set_modification_log([], 0, 2), 'cupdatedby' => __set_modification_log([], 0, 2));
 				if ($this -> Categories_ads_model -> __insert_categories($arr)) {
+					$lastId = $this -> db -> insert_id();
+					$this -> Categories_ads_model -> __update_categories($lastId, array('cslug' => $slug.'-'.$lastId));
+
 					__set_error_msg(array('info' => 'Category berhasil ditambahkan.'));
 					redirect(site_url('categories_ads'));
 				}
@@ -59,7 +64,9 @@ class Home extends MX_Controller {
 					redirect(site_url('categories_ads/edit/' . $id));
 				}
 				else {
-					$arr = array('ctype' => 2, 'cname' => $title, 'cdesc' => $desc, 'cstatus' => $status, 'cparent' => $cparent, 'cupdatedby' => __set_modification_log([], 0, 2));
+					$slug = __slugify($title);
+					
+					$arr = array('ctype' => 2, 'cslug' => $slug.'-'.$id, 'cname' => $title, 'cdesc' => $desc, 'cstatus' => $status, 'cparent' => $cparent, 'cupdatedby' => __set_modification_log([], 0, 2));
 					if ($this -> Categories_ads_model -> __update_categories($id, $arr)) {	
 						__set_error_msg(array('info' => 'Category berhasil diubah.'));
 						redirect(site_url('categories_ads'));

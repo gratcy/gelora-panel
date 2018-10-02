@@ -102,3 +102,8 @@ function __get_upload_file($file, $type) {
     else
     	return $CI -> config -> config['upload']['host'] . $CI -> config -> config['upload']['ads']['path'] . $file;
 }
+
+function __slugify($text) { 
+    $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+    return strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $text));
+}

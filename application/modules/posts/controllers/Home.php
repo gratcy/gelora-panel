@@ -27,8 +27,12 @@ class Home extends MX_Controller {
 				redirect(site_url('posts/add'));
 			}
 			else {
+				$slug = __slugify($title);
+
 				$arr = array('puid' => $this -> permission_lib -> sesresult['uid'], 'pcid' => $category, 'pdate' => date('Y-m-d H:i:s'), 'ptitle' => $title, 'pcontent' => $content, 'pstatus' => $status, 'pcreatedby' => __set_modification_log([], 0, 2), 'pupdatedby' => __set_modification_log([], 0, 2));
 				if ($this -> Posts_model -> __insert_posts($arr)) {
+					$lastId = $this -> db -> insert_id();
+					$this -> Posts_model -> __update_posts($lastId, array('pslug' => $slug.'-'.$lastId));
 					__set_error_msg(array('info' => 'Post berhasil ditambahkan.'));
 					redirect(site_url('posts'));
 				}
@@ -59,7 +63,9 @@ class Home extends MX_Controller {
 					redirect(site_url('posts/edit/' . $id));
 				}
 				else {
-					$arr = array('pcid' => $category, 'ptitle' => $title, 'pcontent' => $content, 'pstatus' => $status, 'pupdatedby' => __set_modification_log([], 0, 2));
+					$slug = __slugify($title);
+
+					$arr = array('pcid' => $category, 'pslug' => $slug.'-'.$id, 'ptitle' => $title, 'pcontent' => $content, 'pstatus' => $status, 'pupdatedby' => __set_modification_log([], 0, 2));
 					if ($this -> Posts_model -> __update_posts($id, $arr)) {
 						__set_error_msg(array('info' => 'Post berhasil diubah.'));
 						redirect(site_url('posts'));
