@@ -27,8 +27,12 @@ class Home extends MX_Controller {
 				redirect(site_url('pages/add'));
 			}
 			else {
+				$slug = __slugify($title);
+					
 				$arr = array('ptitle' => $title, 'pcontent' => $content, 'pstatus' => $status, 'pparent' => $pparent, 'pcreatedby' => __set_modification_log([], 0, 2), 'pupdatedby' => __set_modification_log([], 0, 2));
 				if ($this -> Pages_model -> __insert_pages($arr)) {
+					$lastId = $this -> db -> insert_id();
+					$this -> Pages_model -> __update_pages($lastId, array('pslug' => $slug.'-'.$lastId));
 					__set_error_msg(array('info' => 'Page berhasil ditambahkan.'));
 					redirect(site_url('pages'));
 				}
@@ -59,7 +63,9 @@ class Home extends MX_Controller {
 					redirect(site_url('pages/edit/' . $id));
 				}
 				else {
-					$arr = array('ptitle' => $title, 'pcontent' => $content, 'pstatus' => $status, 'pparent' => $pparent, 'pupdatedby' => __set_modification_log([], 0, 2));
+					$slug = __slugify($title);
+
+					$arr = array('ptitle' => $title, 'pslug' => $slug.'-'.$id, 'pcontent' => $content, 'pstatus' => $status, 'pparent' => $pparent, 'pupdatedby' => __set_modification_log([], 0, 2));
 					if ($this -> Pages_model -> __update_pages($id, $arr)) {
 						__set_error_msg(array('info' => 'Page berhasil diubah.'));
 						redirect(site_url('pages'));
