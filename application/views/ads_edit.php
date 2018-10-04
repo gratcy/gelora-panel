@@ -39,8 +39,33 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" name="name" class="form-control input-default " placeholder="Input Name" value="<?php echo $data[0] -> aname; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phone</label>
+                                            <input type="text" name="phone" class="form-control input-default " placeholder="Input Phone I" value="<?php echo $data[0] -> aphone; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phone II</label>
+                                            <input type="text" name="phone2" class="form-control input-default " placeholder="Input Phone II" value="<?php echo $data[0] -> aphone2; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Province</label>
+                                            <input type="text" name="prov" class="form-control input-default " placeholder="Input Province" value="<?php echo $data[0] -> aprovince; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input type="text" name="city" class="form-control input-default " placeholder="Input City" value="<?php echo $data[0] -> acity; ?>">
+                                        </div>
+                                        <hr />
+                                        <div class="form-group">
                                             <label>Title</label>
                                             <input type="text" name="title" class="form-control input-default " placeholder="Input Title" value="<?php echo $data[0] -> atitle; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Price</label>
+                                            <input type="text" name="price" class="form-control input-default " placeholder="Input Price" value="<?php echo $data[0] -> aprice; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label>Content</label>

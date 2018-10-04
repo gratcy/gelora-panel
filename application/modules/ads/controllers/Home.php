@@ -22,6 +22,12 @@ class Home extends MX_Controller {
 			$status = (int) $this -> input -> post('status');
 			$title = $this -> input -> post('title');
 			$content = $this -> input -> post('content');
+			$name = $this -> input -> post('name');
+			$price = $this -> input -> post('price');
+			$phone = $this -> input -> post('phone');
+			$phone2 = $this -> input -> post('phone2');
+			$prov = $this -> input -> post('prov');
+			$city = $this -> input -> post('city');
 
 			if ($id) {
 				if (!$category || !$title || !$content) {
@@ -31,7 +37,7 @@ class Home extends MX_Controller {
 				else {
 					$slug = __slugify($title);
 
-					$arr = array('acid' => $category, 'aslug' => $slug.'-'.$id, 'atitle' => $title, 'adesc' => $content, 'astatus' => $status, 'aupdatedby' => __set_modification_log([], 0, 2));
+					$arr = array('aname' => $name, 'aphone' => $phone, 'acity' => $city, 'aprovince' => $prov, 'aphone2' => $phone2, 'acid' => $category, 'aslug' => $slug.'-'.$id, 'aprice' => $price, 'atitle' => $title, 'adesc' => $content, 'astatus' => $status, 'aupdatedby' => __set_modification_log([], 0, 2));
 					if ($this -> Ads_model -> __update_ads($id, $arr)) {
 						__set_error_msg(array('info' => 'Ads berhasil diubah.'));
 						redirect(site_url('ads'));
