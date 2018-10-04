@@ -90,3 +90,9 @@ $route['categories_ads'] = 'categories_ads/home';
 $route['categories_ads/add'] = 'categories_ads/home/add';
 $route['categories_ads/edit/?(:num)?'] = 'categories_ads/home/edit/$1';
 $route['categories_ads/remove/(:num)'] = 'categories_ads/home/remove/$1';
+
+$route['ads'] = 'ads/home';
+$route['ads/edit/?(:num)?'] = 'ads/home/edit/$1';
+$route['ads/remove/(:num)'] = 'ads/home/remove/$1';
+$route['ads/image-remove/(:num)'] = 'ads/home/imageRemove/$1';
+$route['ads/upload/(:num)'] = 'ads/home/upload/$1';

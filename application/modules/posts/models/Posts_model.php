@@ -6,7 +6,7 @@ class Posts_model extends CI_Model {
     }
     
     function __get_posts() {
-		$this -> db -> select("a.*, b.cname FROM posts_tab a LEFT JOIN categories_tab b ON a.pcid=b.cid WHERE b.ctype=1 AND (a.pstatus=1 OR a.pstatus=0 OR a.pstatus=2)", FALSE);
+		$this -> db -> select("a.*, b.cname FROM posts_tab a LEFT JOIN categories_tab b ON a.pcid=b.cid WHERE b.ctype=1 AND (a.pstatus=1 OR a.pstatus=0 OR a.pstatus=2) ORDER BY a.pid DESC", FALSE);
 		return $this -> db -> get() -> result();
 	}
 	

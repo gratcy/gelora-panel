@@ -22,8 +22,13 @@
                                 </ul>
                             </li>
                         <?php endif; ?>
-                        <?php if (__get_roles('AdsCategoriesView')) : ?>
-                           <li> <a href="<?php echo site_url('categories_ads'); ?>"><i class="fa fa-volume-up"></i><span class="hide-menu">Categories Ads</span></a></li>
+                        <?php if (__get_roles('AdsCategoriesView') || __get_roles('AdsView')) : ?>
+                            <li> <a class="has-arrow  " href="<?php echo site_url('ads'); ?>" aria-expanded="false"><i class="fa fa-volume-up"></i><span class="hide-menu">Ads <span class="label label-rouded label-danger pull-right">2</span></span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="<?php echo site_url('ads'); ?>">Ads</a></li>
+                                    <li><a href="<?php echo site_url('categories_ads'); ?>">Categories</a></li>
+                                </ul>
+                            </li>
                         <?php endif; ?>
                         <?php if (__get_roles('MediaView')) : ?>
                             <li> <a href="<?php echo site_url('media'); ?>"><i class="fa fa-file-photo-o"></i><span class="hide-menu">Media </span></a></li>

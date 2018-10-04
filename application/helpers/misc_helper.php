@@ -80,7 +80,7 @@ function __sortArrayByDate( $a, $b ) {
 function __set_modification_log($data, $type, $ttype) {
 	if ($ttype === 1) {
 		$data = json_decode($data);
-		return $type == 1 ? $data -> user : __get_date(strtotime($data -> date), 3);
+		return $type == 1 ? $data -> user : __get_date($data -> date, 3);
 	}
 	else {
 	    $CI =& get_instance();
@@ -88,7 +88,13 @@ function __set_modification_log($data, $type, $ttype) {
 	}
 }
 
+function __get_month($id) {
+	$month = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+	return $month[($id-1)];
+}
+
 function __get_date($str, $type=1) {
+	$str = strtotime($str);
 	if ($type == 1) return date('d/m/Y', $str);
 	elseif ($type == 2) return date('d ',$str).__get_month(date('m',$str)).date(' Y', $str);
 	elseif ($type == 3) return date('d/m/Y H:i', $str);
